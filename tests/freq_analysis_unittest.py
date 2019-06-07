@@ -8,9 +8,10 @@ class TestArgumentParser(unittest.TestCase):
     def setUp(self):
         self.parser = ArgumentParser()
 
-    def test_read(self):
-        self.parser.get_args(['read'])
-        self.assertEqual(self.parser.run_cmd(), 'running read')
+    def test_read_string(self):
+        self.parser.get_args(['read', '-s', 'This is test text'])
+        self.parser.run_cmd()
+        self.assertEqual(self.parser.instance.original_text, 'This is test text')
 
     def test_print(self):
         self.parser.get_args(['print'])

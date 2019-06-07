@@ -14,6 +14,10 @@ class ReadTest(unittest.TestCase):
 
     def test_read_string(self):
         self.assertEquals(reader(['-s', 'Testing String']), self.testing_string)
+    
+    self.parser.get_args(['read', '-s', 'This is test text'])
+        self.parser.run_cmd()
+        self.assertEqual(self.parser.instance.original_text, 'This is test text')
 
 
 if __name__ == '__main__':
