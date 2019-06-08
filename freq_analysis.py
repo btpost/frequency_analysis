@@ -4,7 +4,7 @@
 # other ciphers being added maybe.
 
 from prin import prin
-from read import read
+from read import reader
 from apply_key import apply_key
 from set_enc import set_enc
 from frequency import frequency
@@ -42,10 +42,11 @@ class ArgumentParser():
         self.instance = Instance()
         self.args = None
     
-    def get_args(self, inp):
+    def set_args(self, inp):
         self.args = inp
 
-
+    def set_instance(self, inst):
+        self.instance = inst
 
     def run_cmd(self):
         possible_commands = ['read', 'frequency', 'set', 'apply_key', 'reset', 'quit', 'print']
@@ -53,10 +54,9 @@ class ArgumentParser():
         try:
             cmd = possible_commands.index(self.args[0])
             if cmd == 0:
-                #instance.set_original_text(read(self.args[1:]))
-                return read(self.args[1:])
+                self.instance.set_original_txt(reader(self.args[1:]))
             elif cmd == 1:
-                return frequency(self.args[1:])
+                return frequency(self.args[1:], self.instance.current_text)
             elif cmd == 2:
                 # instance.set_current_text(set_enc(args[1:]))
                 return set_enc(self.args[1:])
@@ -79,5 +79,5 @@ parser = ArgumentParser()
 
 #while True:
 #    inp = input()
-#    parser.get_args(inp.split(" "))
+#    parser.set_args(inp.split(" "))
 #    parser.run_cmd()
